@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <meta name="description" content="HTX 火宝 Agent 运营使用教程：无需个人 API，包含 Codex 与 Claude 使用路径。" />
+  <meta name="description" content="HTX 火宝 Agent 运营使用教程：兼容任意可调用的图片生成工具，包含 Codex 与 Claude 使用路径。" />
   <title>HTX 火宝 Agent｜运营使用教程</title>
   <link rel="stylesheet" href="styles.css" />
   <style>.mascot-card::before{display:none}.mascot-card img{mix-blend-mode:normal}</style>
@@ -20,7 +20,7 @@
       <div class="hero-copy">
         <span class="eyebrow">HTX 运营工具指南</span>
         <h1>3 项文案，完成一张<br><em>火宝社媒海报</em></h1>
-        <p class="lead">无需自行接入即梦或 OpenAI API。输入副标题、主标题与日期，Agent 自动完成场景生成、裁切、排版和基础检查。</p>
+        <p class="lead">不绑定即梦、OpenAI 或其他特定平台。连接任意兼容的图片生成工具后，输入副标题、主标题与日期，Agent 自动完成场景生成、裁切、排版和基础检查。</p>
         <div class="actions">
           <a class="button primary" href="#prompt">复制提示词</a>
           <a class="button ghost" href="HTX火宝Agent运营使用教程_无需API.pdf" download>下载 PDF</a>
@@ -42,9 +42,9 @@
       </div>
       <div class="check-grid">
         <article class="check"><b>✓</b><h3>能看到 Agent</h3><p>工作台的 Agent / Skills 列表中可以看到“HTX 火宝 Agent”。</p></article>
-        <article class="check"><b>✓</b><h3>已启用图像生成</h3><p>公司提供的账号或工作区已具备图像生成能力。</p></article>
+        <article class="check"><b>✓</b><h3>已连接生图工具</h3><p>当前环境至少有一个可调用的图片生成工具，平台不限。</p></article>
       </div>
-      <div class="notice warning"><strong>无需个人 API Key</strong><span>只有 Agent 文件、没有图像生成权限时不能出图。若入口缺失或显示“图像生成不可用”，联系工作区管理员。</span></div>
+      <div class="notice warning"><strong>Agent 不绑定生图平台</strong><span>即梦、OpenAI、Flux、Stable Diffusion 或其他平台均可，但必须通过当前环境可调用的 Connector、MCP 或工具接入。只有 Agent 文件、没有生图工具时不能出图。</span></div>
     </section>
 
     <section class="section blue" id="steps">
@@ -78,19 +78,19 @@
       <div class="wrap">
         <span class="section-no purple">04</span>
         <h2>如果同事使用 Claude</h2>
-        <div class="notice claude-note"><strong>普通 Claude 默认不能直接生成火宝插画</strong><span>推荐让 Claude 整理并确认 3 项最终文案，再交给 Codex 中的 HTX 火宝 Agent 出图。</span></div>
-        <div class="flow" aria-label="Claude 到火宝 Agent 的工作流程">
-          <article><i>1</i><h3>Claude</h3><p>整理并确认<br>3 项最终文案</p></article><b>→</b>
-          <article><i>2</i><h3>火宝 Agent</h3><p>生成场景、排版<br>并自动检查</p></article><b>→</b>
+        <div class="notice claude-note"><strong>Claude 版与 Codex 版使用同一套火宝规则</strong><span>区别只在工具层：使用前必须为 Claude 连接至少一个兼容的生图工具，具体平台不限。</span></div>
+        <div class="flow" aria-label="Claude 火宝 Agent 的工作流程">
+          <article><i>1</i><h3>连接工具</h3><p>任选一个兼容的<br>图片生成工具</p></article><b>→</b>
+          <article><i>2</i><h3>火宝 Agent</h3><p>自动调用工具、排版<br>并完成检查</p></article><b>→</b>
           <article><i>3</i><h3>最终 PNG</h3><p>下载并按清单验收</p></article>
         </div>
-        <div class="section-head compact"><h3>在 Claude 中先复制这段</h3><button class="copy" data-copy="prompt-claude">复制</button></div>
-        <pre id="prompt-claude">请检查以下文案是否完整，只按原文输出 3 行，不润色、不增删：
+        <div class="section-head compact"><h3>在 Claude 中直接复制这段</h3><button class="copy" data-copy="prompt-claude">复制</button></div>
+        <pre id="prompt-claude">请使用火宝 Agent，并调用当前已连接的图片生成工具制作一张社媒海报：
 
 副标题：[填写副标题]
 主标题：[填写主标题]
 日期：[填写日期或时间；不需要则写“留空”]</pre>
-        <p class="small">只有公司管理员已经为 Claude / Claude Code 接入并适配了生图工具时，才可在 Claude 内完成一站式出图。仅发送 SKILL.md 不会自动获得生图能力。</p>
+        <p class="small">Agent 只识别“图片生成能力”，不写死平台名称。只有一个工具时直接调用；多个工具时按用户指定或默认工具调用；没有工具时明确提示无法出图。仅发送 Agent / SKILL.md 不会自动获得生图能力。</p>
       </div>
     </section>
 
@@ -108,8 +108,9 @@
 
     <section class="section faq" id="faq">
       <div class="wrap"><span class="section-no light">06</span><h2>常见问题</h2>
-        <details open><summary>没有即梦 / OpenAI API，能用吗？</summary><p>能。前提是公司提供的 Codex / ChatGPT 工作区已经启用内置图像生成。</p></details>
-        <details><summary>只使用 Claude，能直接出图吗？</summary><p>普通 Claude 默认不能生成火宝插画。请先用 Claude 确认 3 行文案，再复制到 Codex 的 HTX 火宝 Agent；除非管理员已为 Claude 接入并适配生图工具。</p></details>
+        <details open><summary>一定要使用即梦或 OpenAI 吗？</summary><p>不需要。只要当前环境连接了一个可被 Agent 调用、能接收提示词并返回图片的兼容生图工具即可。</p></details>
+        <details><summary>只使用 Claude，能直接出图吗？</summary><p>可以，但必须先为 Claude 连接至少一个兼容生图工具。未连接任何工具时，Claude 可以整理文案，但火宝 Agent 无法生成图片。</p></details>
+        <details><summary>同时连接了多个生图工具怎么办？</summary><p>用户指定平台时按指定工具调用；未指定时使用当前环境的默认图片生成工具。</p></details>
         <details><summary>看不到 HTX 火宝 Agent 怎么办？</summary><p>Agent 尚未安装、同步或未对该账号开放，请联系工作区管理员。</p></details>
         <details><summary>哪些需求不适合这个 Agent？</summary><p>VIP 金色、复杂长图、透明素材、模板复刻、信息密集规则图，以及需要品牌母版严格复刻的任务。</p></details>
       </div>
